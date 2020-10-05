@@ -1,24 +1,46 @@
-version: '3'
+version: "3.2"
 services:
-   php:
-     build: php
-     expose:
-     - "9000"
-     volumes:
-     - ./php/www:/var/www/html
+  php:
+    build: './php/'
+    networks:
+      - backend
+    volumes:
+      - ./public_html/:/var/www/html/
+  apache:
+    build: './apache/'
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public_html/:/var/www/html/
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    volumes:
+      - ./.docker/rabbitmq/etc/:/etc/rabbitmq/
+      - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
+      - ./.docker/rabbitmq/logs/:/var/log/rabbitmq/
+    environment:
+      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    ports:
+      - 5672:5672
+      - 15672:15672
 
-    apache2:
-        image: webdevops/apache:latest
-        args:
-            - PHP_SOCKET=php:"9000"
-        volumes:
-            - ./php/www:/var/www/html
-        ports:
-            - "80:80"
-            - "443:443"
-        links:
-            - php
-  messaging:
-     image: rabbitmq:3-management
-  database:
-     image: mysql
+  mysql:
+    image: mysql:5.6.40
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+networks:
+  frontend:
+  backend:
+
+      
