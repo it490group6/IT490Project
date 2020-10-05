@@ -1,0 +1,9 @@
+version: '3'
+services:
+  messaging:
+     image: rabbitmq:3-management
+     ports:
+     - 8080:80
+
+  database:
+     image: mysql
