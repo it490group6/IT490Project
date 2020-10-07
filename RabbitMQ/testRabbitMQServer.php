@@ -14,7 +14,7 @@ function requestProcessor($request)
     return "ERROR: unsupported message type";
   }
 
-  return array("returnCode" => '0', 'message'=>"Server received request and pro>
+  return array("returnCode" => '0', 'message'=>"Server received request and process);
 }
 
 $server = new rabbitMQServer("testRabbitMQ.ini","testServer");
