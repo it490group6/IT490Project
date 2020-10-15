@@ -9,7 +9,7 @@ $response = authentication($email, $userpass);
 if($response == false){
       echo "Login Failed";
       $_SESSION['message'] = "Invalid email or password, try again!";
-      header("location: error.php");
+      
 }
 else{
       echo "Login Successful";
