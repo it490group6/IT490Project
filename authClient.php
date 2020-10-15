@@ -36,20 +36,7 @@ if (isset($argv[1]))
 {
   $msg = $argv[1];
 }
-else
-{
-  $msg = "register";
-}
 
-$request = array();
-$request['type'] = "Register";
-$request['email'] = $email;
-$request['firstname'] = $firstname;
-$request['lastname'] = $lastname;
-$request['password'] = $password;
-$request['message'] = $msg;
-$response = $client->send_request($request);
-//$response = $client->publish($request);
 
 echo "client received response: ".PHP_EOL;
 return ($response);
