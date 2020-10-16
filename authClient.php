@@ -1,32 +1,29 @@
-#!/usr/bin/php
-<?php
-require_once('path.inc');
-require_once('get_host_info.inc');
+equire_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
-function authentication($email, $password) {
-
-$client = new rabbitMQClient("testRabbitMQ.ini","testServer");//Check this part in the .ini file
+function authentication($email, $pass){
+$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
 if (isset($argv[1]))
 {
   $msg = $argv[1];
 }
 else
 {
-  $msg = "Login";
+  $msg = "login";
 }
 
 $request = array();
-$request['type'] = "login";
+$request['type'] = "Login";
 $request['email'] = $email;
-$request['password'] = $password;
+$request['password'] = $pass;
 $request['message'] = $msg;
 $response = $client->send_request($request);
-//$response = $client->publish($request);
+/$response = $client->publish($request);
 
 echo "client received response: ".PHP_EOL;
-print_r($response);
+return ($response);
 echo "\n\n";
 
 echo $argv[0]." END".PHP_EOL;
 }
+?>
