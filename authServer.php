@@ -14,11 +14,11 @@ function authentication($email,$userpass)
       $mysqli = new mysqli($host,$user,$dbpass,$db);
       if($mysqli->connect_errno){
         echo "\nMaster server down, switching to backup...\n";
-        $host = '25.78.212.215';
-        $user = 'testuser';
-        $dbpass = 'Dipish_123';
-        $db = 'IT490PG6';
-        $mysqli = new mysqli($host,$user,$dbpass,$db) or die($mysqli->error);
+        $host = '192.168.43.25';
+        $user = 'usr';
+        $dbpass = 'password';
+        $db = 'accounts';
+       $mysqli = new mysqli($host,$user,$dbpass,$db) or die($mysqli->error);
       }
       else{
         echo "Using master.\n";
@@ -27,7 +27,7 @@ function authentication($email,$userpass)
       $userinfo = array();
 
       $email = $mysqli->escape_string($email);
-      $result = $mysqli->query("SELECT * FROM users WHERE email='$email' and password='$userpass'");
+      $result = $mysqli->query("SELECT * FROM users WHERE email='$email' and pa>
 
       $user = $result->fetch_assoc();
 
@@ -47,9 +47,10 @@ function authentication($email,$userpass)
 }
 
 
+
 function requestProcessor($request)
 {
-  echo "received request".PHP_EOL;
+echo "received request".PHP_EOL;
   var_dump($request);
   if(!isset($request['type']))
   {
@@ -60,14 +61,14 @@ function requestProcessor($request)
     case "Login":
       return authentication($request['email'],$request['password']);
       break;
+    case "Register":
+      return registration($request['firstname'],$request['lastname'],$request['>
+      break;
   }
-  return array("returnCode" => '0', 'message'=>"Server received request and processed");
+  return array("returnCode" => '0', 'message'=>"Server received request and pro>
 }
-
 $server = new rabbitMQServer("testRabbitMQ.ini","testServer");
 
-echo "testRabbitMQServer BEGIN".PHP_EOL;
 $server->process_requests('requestProcessor');
-echo "testRabbitMQServer END".PHP_EOL;
 exit();
 ?>
