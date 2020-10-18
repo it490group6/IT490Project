@@ -196,52 +196,26 @@ try{
 }  
 
 function doRegister($username, $email, $password, $firstname, $lastname) {
-
-	$date = date("Y-m-d");
-	$time = date("h:m:sa");
-	$options = ['length' => 11];
-	$hash = password_hash($password, PASSWORD_DEFAULT, $options);
-
-	try {
-		$pdo = new PDO("mysql:host=localhost;dbname=HOP", "root", "root");
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-		echo "Connected Successfully".PHP_EOL;
-
-	} catch (PDOException $e) {
-		echo "Connection Failed: ". $e->getMessage();
-	}
-
-	$result = $pdo->prepare("SELECT * FROM users where username = '{$username}'");
-	$result->execute();
-
-	$row = $result->fetchAll();
-
-	if (!empty($row)) {
-		$response = "302";
-		$log = "$date $time Response Code 302: Username $username already registered.\n";
-
-		return $response;
-
-	} else {
+require('config.php');
+$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
+$db = new PDO($conn_string, $username, $password);
 
 
-		$statement = $pdo->prepare("INSERT INTO users (username, email, password, firstname, lastname) VALUES (:username, :email, :password, :firstname, :lastname)");
+$stmt = $db->query("SELECT * from Login");
+$result = $stmt->fetch();
 
-		$statement->bindParam(":username", $username);
-		$statement->bindParam(":email", $email);
-		$statement->bindParam(":password", $hash);
-		$statement->bindParam(":firstname", $firstname);
-		$statement->bindParam(":lastname", $lastname);
 
-		$statement->execute();
-
-		$response = "$username";
-		$log = "$date $time Response Code 201: Email $email successfully added to the database. \n";
-
-		return $response;
-
-	}
+  $User = $_POST['username'];
+  $Pass = $_POST['password'];
+  $cPass = $_POST['confirmPassword'];
+  
+//checks if password entered and confirmation are equal
+if(strlen($Pass) > 0 && $Pass == $cPass){
+  $hashed = hash('sha256', $Pass);//this hashes the password so no one can see the password
+  $insert_query = "INSERT INTO users (username, email, firstname, lastname, password) VALUES (NULL, '$User', '$hashed')";
+  $stmt = $db->prepare($insert_query);
+  $r = $stmt->execute();
+ 	
 
 }
 
