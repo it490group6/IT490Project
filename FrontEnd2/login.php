@@ -49,7 +49,7 @@ if (isset($_POST['register'])) {
 			$_SESSION['username'] = $response[0]['username'];
 			$_SESSION['firstname'] = $response[0]['firstname'];
 			$_SESSION['lastname'] = $response[0]['lastname'];
-			header("Location: profile.php");
+			header("Location: success.php");
 		}
 	}
 
