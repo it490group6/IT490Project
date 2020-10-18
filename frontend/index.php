@@ -1,71 +1,49 @@
-<?php
-/* Main page with two forms: sign up and log in */
-require './db.php';
-
-session_start();
-?>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sign-Up/Login Form</title>
-  <?php include 'css/css.html'; ?>
-  <link rel="stylesheet" href="css/style.css">
+	<title>Pog Finder</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/stylesheet.css" type="text/css">
 </head>
-
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-    if (isset($_POST['login'])) { //user logging in
-
-        require 'back/login.php';
-
-    }
-
-  
-}
-?>
 <body>
-  <div class="form">
 
-      <ul class="tab-group">
-        <li class="tab"><a href="#signup">Create Account</a></li>
-        <li class="tab active"><a href="#login">Log In</a></li>
-      </ul>
-      <div class="tab-content">
-
-         <div id="login">
-          <h1>Log in to continue</h1>
-
-          <form action="index.php" method="post" autocomplete="off">
-
-            <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="username" required autocomplete="off" name="username"/>
-          </div>
-
-          <div class="field-wrap">
-            <label>
-              Password<span class="req">*</span>
-            </label>
-            <input type="password" required autocomplete="off" name="password"/>
-          </div>
-
-
-
-          <button class="button button-block" name="login" />Log In</button>
-
-          </form>
-
-        </div>
+	<div class="background-image h-100">
+		<div class="login-box row h-100 justify-content-center align-items-center">
+			<form method="post" class="col-12 login-form" action='login.php'>
+				<h1 id="login-title">Pog Finder</h1>
+				<p id="login-subtitle">Find The Right Streamer For You</p>
+				<div class="error-div">
+					<span class="error"><?php echo $error; ?></span>
+				</div>
+				<div class="form-group row">
+					<label class='col-md-12 col-form-label col-form-label-lg'>Username</label>
+					<div class="col-md-12">
+						<input type="text" name="username" placeholder="Enter your username" class="form-control input-lg">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class='col-md-12 col-form-label col-form-label-lg'>Password</label>
+					<div class="col-md-12">
+						<input type="text" name="password" placeholder="Enter your password" class="form-control input-lg">
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-md-12">
+						<input type="submit" class="btn btn-success btn-lg btn-block" value="SIGN IN" name="login">
+					</div>
+					<div class="col-md-12">
+						<input type="submit" class="btn btn-success btn-lg btn-block" value="CREATE AN ACCOUNT" name="register">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 
 
-      </div><!-- tab-content -->
-</div> <!-- /form -->
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
-    <script src="js/index.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
 </body>
 </html>
