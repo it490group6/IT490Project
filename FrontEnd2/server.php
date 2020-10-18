@@ -169,8 +169,6 @@ $conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
 try{
   $db = new PDO($conn_string, $username, $password);
   
-  $hashed = password_hash($enteredPassword, PASSWORD_DEFAULT); 
-  $correct = password_verify($enteredPassword, $hashed);
   $stmt = $db->query("SELECT * FROM Accounts WHERE username = '$enteredUsername'");
   $result = $stmt->fetch();
   $row = $result
