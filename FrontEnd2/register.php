@@ -15,7 +15,7 @@ $confirmPassword = ($_POST['confirmPassword']);
 
 
 $missingError = '';
-$valError = '';
+$valError = ''; //validates errors
 
 
 if (isset($_POST['register'])) {
@@ -30,7 +30,7 @@ if (isset($_POST['register'])) {
                 require 'register.html';
 
         } else {
-
+                 //pulls data from frontend and puts it through Rabbitmq/backend to go to database
                 $request = array();
                 $request['type'] = "register";
                 $request['username'] = $username;
