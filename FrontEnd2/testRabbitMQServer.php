@@ -16,7 +16,7 @@ function requestProcessor($request) {
 			return AuthLogin($request['username'], $request['password']);
 		case "register":
 			print_r($request);
-			return NewReg($request['username'], $request['email'], $request['password'], $request['firstname'], $request['lastname']);}
+			return NewReg($request['username'], $request['email'], $request['firstname'], $request['lastname'],$request['password']);}
 
 	return array("returnCode" => '0', 'message' => "Server received request and processed");
 }
@@ -25,7 +25,7 @@ function AuthLogin($username, $password) {
 	$hash = password_hash($password, PASSWORD_DEFAULT);
 	try {
 		$pdo = new //PDO("mysql:host=10.192.234.151;dbname=testData", "testuser", "Dipish123!");
-		PDO("mysql:host=10.192.236.169;dbname=IT490PG6", "testuser", "Dipish_123!");
+		PDO("mysql:host=10.147.17.159;dbname=IT490PG6", "testuser", "Dipish_123!");
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		echo "Connected Successfully".PHP_EOL;
@@ -74,7 +74,7 @@ function NewReg($username, $email,$firstname, $lastname, $password) {
 
 	try {
 		$pdo = new //PDO("mysql:host=10.192.234.151;dbname=testData", "testuser", "Dipish123!");
-		PDO("mysql:host=10.192.236.169;dbname=IT490PG6", "testuser", "Dipish_123!");
+		PDO("mysql:host=10.147.17.159;dbname=IT490PG6", "testuser", "Dipish_123!");
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		echo "Connected Successfully".PHP_EOL;
