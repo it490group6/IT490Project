@@ -25,7 +25,7 @@ function AuthLogin($username, $password) {
 	$hash = password_hash($password, PASSWORD_DEFAULT);
 	try {
 		$pdo = new //PDO("mysql:host=10.147.17.65;dbname=testData", "testuser", "Dipish123!");
-		PDO("mysql:host=10.147.17.159;dbname=IT490PG6", "testuser", "Dipish_123!");
+		PDO("mysql:host=10.147.17.11;dbname=IT490PG6", "testuser", "Dipish_123!");
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		echo "Connected Successfully".PHP_EOL;
@@ -74,7 +74,7 @@ function NewReg($username, $email,$firstname, $lastname, $password) {
 
 	try {
 		$pdo = new //PDO("mysql:host=10.147.17.65;dbname=testData", "testuser", "Dipish123!");
-		PDO("mysql:host=10.147.17.159;dbname=IT490PG6", "testuser", "Dipish_123!");
+		PDO("mysql:host=10.147.17.11;dbname=IT490PG6", "testuser", "Dipish_123!");
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		echo "Connected Successfully".PHP_EOL;
