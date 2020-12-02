@@ -94,13 +94,14 @@ function NewReg($username, $email,$firstname, $lastname, $password) {
 
 	} else {
 
-		$statement = $pdo->prepare("INSERT INTO users (username, email, firstname, lastname, password) VALUES (:username, :email, :firstname, :lastname, :password)");
+		$statement = $pdo->prepare("INSERT INTO users (username, email, firstname, lastname, password, hash) VALUES (:username, :email, :firstname, :lastname, :password, :hash)");
 
 		$statement->bindParam(":username", $username);
 		$statement->bindParam(":email", $email);
 		$statement->bindParam(":firstname", $firstname);
 		$statement->bindParam(":lastname", $lastname);
-		$statement->bindParam(":password", $hash);
+		$statement->bindParam(":password", $password);
+		$statment ->bindParam(":hash", $hash);
 		$statement->execute();
 
 		$response = "$username";
