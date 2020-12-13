@@ -95,7 +95,14 @@ span.psw {
   </div>
 
   <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">CREATE AN ACCOUNT</button>
+    <button type="button"  onclick="myFunction()" >CREATE AN ACCOUNT</button>
     <span class="psw">Forgot <a href="#">password?</a></span>
   </div>
 </form>
+<script>
+function myFunction() {
+  location.replace("https://www.w3schools.com")
+}
+</script>
+</body>
+</html>
