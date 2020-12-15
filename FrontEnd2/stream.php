@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Contact</title>
+<title>Stream Search</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -120,15 +120,17 @@ curl_close ($ch);
 $result = json_decode($result, true);
 //echo json_encode($result, JSON_PRETTY_PRINT);
  
-$streams = $result['streams'];
+$streams = array_reverse($result['streams']);
 //echo $streams->_id;
 
-
+//print_r($result);
 // foreach ($result as $key => $value){
 	//echo $value;
 	foreach($streams as $k => $v){
 	//	echo $k.PHP_EOL;
-		echo $streams[$k]['channel']['display_name'].": ".$streams[$k]['channel']['url']."<br>"."<br>";
+	
+		echo $streams[$k]['channel']['display_name'].": ".$streams[$k]['channel']['url']." Live Viewers: ".$streams[$k]['viewers']."<br>"."<br>";
+		
 
 //		echo $v.PHP_EOL;
 }
